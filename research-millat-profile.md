@@ -425,7 +425,7 @@ Recent articles demonstrating technical knowledge:
 4. **Developed production-ready tools** (SetForge, WebScrape) for ML dataset creation
 5. **Founded CodestBD Inc** - software development company
 6. **Active open-source contributor** with 26+ public repositories
-7. **Growing social media presence** with 12K+ Twitter followers and 10K+ YouTube subscribers
+7. **Growing social media presence** with Twitter followers (unverified) and 10K+ YouTube subscribers
 8. **IRD Internship at Sharda University** - Managing digital content for Bangladeshi student recruitment
 9. **Bilingual Content Creator** - Professional content in both English and Bengali
 10. **Multi-platform Manager** - YouTube channel + 2 educational blogs for IRD

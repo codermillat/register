@@ -3,7 +3,7 @@
   "skills": {
     "sonoscli": {
       "version": "1.0.0",
-      "installedAt": 1769864660911
+      "installedAt": 1769885240276
     },
     "calendar": {
       "version": "1.0.0",
@@ -164,6 +164,34 @@
     "agent-relay-digest": {
       "version": "0.1.0",
       "installedAt": 1769883725127
+    },
+    "blogwatcher": {
+      "version": "1.0.0",
+      "installedAt": 1769892607039
+    },
+    "coding-agent": {
+      "version": "1.0.1",
+      "installedAt": 1769892609324
+    },
+    "gemini": {
+      "version": "1.0.0",
+      "installedAt": 1769892611765
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1769892613729
+    },
+    "nano-pdf": {
+      "version": "1.0.0",
+      "installedAt": 1769892615635
+    },
+    "openai-whisper": {
+      "version": "1.0.0",
+      "installedAt": 1769892617735
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1769892622454
     }
   }
 }

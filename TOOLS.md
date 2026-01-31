@@ -101,6 +101,76 @@ export TWITTER_ACCESS_SECRET="your-access-secret"
 
 ---
 
+## 🆕 Newly Installed Skills (2026-01-31)
+
+### 📰 Blogwatcher
+✅ Installed: `blogwatcher` CLI (Go)
+- Track RSS/Atom feeds for updates
+- Commands: `blogwatcher add`, `blogwatcher scan`, `blogwatcher articles`
+- No API key needed
+
+### 🧩 Coding Agent
+✅ Skill installed (framework for Codex/Claude Code/OpenCode/Pi)
+- Requires one of: `codex`, `claude`, `opencode`, or `pi` CLI
+- Currently: No coding agent CLI installed (optional)
+- Use for background coding tasks
+
+### ♊️ Gemini CLI
+✅ Installed: `gemini` v0.26.0
+- One-shot Q&A, summaries, generation
+- Auth: Run `gemini` once interactively to login
+- Or set `GEMINI_API_KEY` environment variable
+
+### 📄 GitHub CLI
+✅ Installed: `gh` v2.43.1
+- Issues, PRs, CI runs, API queries
+- Auth: Run `gh auth login`
+- Always use `--repo owner/repo` when not in git dir
+
+### 📄 nano-pdf
+✅ Installed: `nano-pdf` CLI (Python/uv)
+- Edit PDFs with natural language
+- Requires: `GEMINI_API_KEY` or similar LLM key
+- Example: `nano-pdf edit doc.pdf 1 "Fix the title"`
+
+### 🎙️ OpenAI Whisper (Local)
+✅ Installed: `whisper` CLI (Python/uv)
+- Local speech-to-text (no API key!)
+- Models download to `~/.cache/whisper` on first run
+- Example: `whisper audio.mp3 --model medium --output_format txt`
+
+### 🧾 Summarize
+✅ Installed: `summarize` v1.0.0
+- Summarize URLs, files, YouTube, PDFs
+- Requires: API key for your chosen model
+- Set `GEMINI_API_KEY`, `OPENAI_API_KEY`, or `ANTHROPIC_API_KEY`
+- Example: `summarize "https://example.com" --model google/gemini-3-flash-preview`
+
+### 🌤️ Weather
+✅ Built-in OpenClaw skill
+- No configuration needed
+- Works out of the box
+
+### ❌ Not Found on ClawHub
+- `session-logs` - Not available
+- `sherpa-onnx-tts` - Not available (consider `edge-tts` or `openai-tts` alternatives)
+
+---
+
+## 🔑 API Keys Summary
+
+| Skill | Key | Required |
+|-------|-----|----------|
+| Gemini CLI | `GEMINI_API_KEY` | Yes (or login) |
+| nano-pdf | `GEMINI_API_KEY` (or other) | Yes |
+| Summarize | `GEMINI_API_KEY` / `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` | Yes |
+| GitHub | `gh auth login` | Yes |
+| Whisper | None | No (local) |
+| Blogwatcher | None | No |
+| Weather | None | No |
+
+---
+
 ## 💡 Quick Setup Tips
 
 ### Priority 1: Email & Calendar
