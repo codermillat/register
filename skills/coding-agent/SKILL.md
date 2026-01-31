@@ -1,23 +1,34 @@
 ---
 name: coding-agent
-description: Run Codex CLI, Claude Code, OpenCode, or Pi Coding Agent via background process for programmatic control.
-metadata: {"clawdbot":{"emoji":"🧩","requires":{"anyBins":["claude","codex","opencode","pi"]}}}
+description: Run Cursor Agent, Gemini CLI, GitHub Copilot, Codex, Claude Code, or Pi via background process for programmatic control.
+metadata: {"clawdbot":{"emoji":"🧩","requires":{"anyBins":["agent","gemini","copilot","claude","codex","opencode","pi"]}}}
 ---
 
 # Coding Agent (background-first)
 
-Use **bash background mode** for non-interactive coding work. For interactive coding sessions, use the **tmux** skill (always, except very simple one-shot prompts).
+Use **bash background mode** for non-interactive coding work. For interactive coding sessions, use the **tmux** skill.
+
+## Available Agents (Millat's Setup)
+
+| Agent | Command | Status | Best For |
+|-------|---------|--------|----------|
+| 📝 **Cursor Agent** | `agent` | ✅ Installed | Full coding tasks, file editing |
+| ♊️ **Gemini CLI** | `gemini` | ✅ Installed | Quick Q&A, code review |
+| 🤖 **GitHub Copilot** | `copilot` | ✅ Installed | Code suggestions, explain |
+| 💻 Codex | `codex` | ❌ Not installed | — |
+| 🧠 Claude | `claude` | ❌ Not installed | — |
+| 🥧 Pi | `pi` | ❌ Not installed | — |
+
+---
 
 ## The Pattern: workdir + background
 
 ```bash
-# Create temp space for chats/scratch work
+# Create temp space for scratch work
 SCRATCH=$(mktemp -d)
 
-# Start agent in target directory ("little box" - only sees relevant files)
-bash workdir:$SCRATCH background:true command:"<agent command>"
-# Or for project work:
-bash workdir:~/project/folder background:true command:"<agent command>"
+# Start agent in target directory
+exec workdir:$SCRATCH background:true command:"<agent command>"
 # Returns sessionId for tracking
 
 # Monitor progress
@@ -33,242 +44,206 @@ process action:write sessionId:XXX data:"y"
 process action:kill sessionId:XXX
 ```
 
-**Why workdir matters:** Agent wakes up in a focused directory, doesn't wander off reading unrelated files (like your soul.md 😅).
+**Why workdir matters:** Agent wakes up in a focused directory, doesn't wander off reading unrelated files.
 
 ---
 
-## Codex CLI
+## 📝 Cursor Agent (Primary)
 
-**Model:** `gpt-5.2-codex` is the default (set in ~/.codex/config.toml)
+The Cursor Agent CLI (`agent`) is a headless AI coding assistant.
 
-### Building/Creating (use --full-auto or --yolo)
+### One-shot (non-interactive)
 ```bash
-# --full-auto: sandboxed but auto-approves in workspace
-bash workdir:~/project background:true command:"codex exec --full-auto \"Build a snake game with dark theme\""
+# Quick task with --print flag
+agent --print "Explain this code: $(cat main.py)"
 
-# --yolo: NO sandbox, NO approvals (fastest, most dangerous)
-bash workdir:~/project background:true command:"codex --yolo \"Build a snake game with dark theme\""
-
-# Note: --yolo is a shortcut for --dangerously-bypass-approvals-and-sandbox
+# Background mode for longer tasks
+exec workdir:~/project background:true command:"agent --print 'Refactor the utils folder for better organization'"
 ```
 
-### Reviewing PRs (vanilla, no flags)
-
-**⚠️ CRITICAL: Never review PRs in Clawdbot's own project folder!**
-- Either use the project where the PR is submitted (if it's NOT ~/Projects/clawdbot)
-- Or clone to a temp folder first
-
+### Interactive mode
 ```bash
-# Option 1: Review in the actual project (if NOT clawdbot)
-bash workdir:~/Projects/some-other-repo background:true command:"codex review --base main"
+# Opens full TUI
+agent "Build a REST API with FastAPI"
 
-# Option 2: Clone to temp folder for safe review (REQUIRED for clawdbot PRs!)
-REVIEW_DIR=$(mktemp -d)
-git clone https://github.com/clawdbot/clawdbot.git $REVIEW_DIR
-cd $REVIEW_DIR && gh pr checkout 130
-bash workdir:$REVIEW_DIR background:true command:"codex review --base origin/main"
-# Clean up after: rm -rf $REVIEW_DIR
+# Plan mode (read-only analysis)
+agent --plan "Review this codebase and suggest improvements"
 
-# Option 3: Use git worktree (keeps main intact)
-git worktree add /tmp/pr-130-review pr-130-branch
-bash workdir:/tmp/pr-130-review background:true command:"codex review --base main"
+# Ask mode (Q&A)
+agent --mode ask "How does the authentication work in this project?"
 ```
 
-**Why?** Checking out branches in the running Clawdbot repo can break the live instance!
-
-### Batch PR Reviews (parallel army!)
+### With API key
 ```bash
-# Fetch all PR refs first
-git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'
+agent --api-key $CURSOR_API_KEY "Your task"
+# Or set env: export CURSOR_API_KEY="your-key"
+```
 
-# Deploy the army - one Codex per PR!
-bash workdir:~/project background:true command:"codex exec \"Review PR #86. git diff origin/main...origin/pr/86\""
-bash workdir:~/project background:true command:"codex exec \"Review PR #87. git diff origin/main...origin/pr/87\""
-bash workdir:~/project background:true command:"codex exec \"Review PR #95. git diff origin/main...origin/pr/95\""
-# ... repeat for all PRs
+### Useful flags
+- `--print` / `-p`: Non-interactive, prints to console
+- `--plan`: Read-only planning mode
+- `--mode ask`: Q&A mode for explanations
+- `--cloud` / `-c`: Cloud mode (opens composer picker)
+- `--resume [chatId]`: Resume previous session
+- `--output-format <format>`: text | json | stream-json
+
+---
+
+## ♊️ Gemini CLI
+
+Fast one-shot queries using Google's Gemini models.
+
+### Quick usage
+```bash
+# Simple question
+gemini "What is the time complexity of quicksort?"
+
+# Code review
+gemini "Review this function for bugs: $(cat utils.py)"
+
+# With specific model
+gemini --model gemini-2.0-flash "Explain async/await in Python"
+
+# JSON output
+gemini --output-format json "List 5 Python best practices"
+```
+
+### Background mode
+```bash
+exec background:true command:"gemini 'Analyze this codebase and list all TODO items' > /tmp/todos.txt"
+```
+
+### Auth
+- Run `gemini` once interactively to login via OAuth
+- Or set `GEMINI_API_KEY` environment variable
+
+---
+
+## 🤖 GitHub Copilot CLI
+
+AI-powered coding assistant from GitHub.
+
+### Quick usage
+```bash
+# Explain code
+copilot explain "$(cat complex_function.py)"
+
+# Suggest improvements
+copilot suggest "How to optimize this database query?"
+
+# Start interactive session
+copilot
+```
+
+### As MCP server (advanced)
+```bash
+copilot --acp  # Start as Agent Client Protocol server
+```
+
+### Useful flags
+- `--add-dir <dir>`: Add directory to allowed list
+- `--add-github-mcp-tool <tool>`: Enable specific MCP tools
+- Use `"*"` for all tools
+
+---
+
+## Choosing the Right Agent
+
+| Task | Best Agent | Command |
+|------|------------|---------|
+| Quick code question | Gemini | `gemini "question"` |
+| Explain code | Copilot | `copilot explain "code"` |
+| Build feature | Cursor | `agent --print "task"` |
+| Code review | Gemini or Cursor | `gemini "review..."` or `agent --plan` |
+| Refactor files | Cursor | `agent "refactor..."` |
+| Debug issue | Cursor | `agent --mode ask "why is X failing?"` |
+
+---
+
+## Parallel Tasks with Background Mode
+
+```bash
+# Run multiple agents in parallel
+exec background:true command:"agent --print 'Fix the login bug'" 
+exec background:true command:"gemini 'Review auth.py for security issues' > /tmp/review.txt"
+exec background:true command:"copilot suggest 'Optimize database queries'"
 
 # Monitor all
 process action:list
 
-# Get results and post to GitHub
+# Get results
 process action:log sessionId:XXX
-gh pr comment <PR#> --body "<review content>"
 ```
-
-### Tips for PR Reviews
-- **Fetch refs first:** `git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'`
-- **Use git diff:** Tell Codex to use `git diff origin/main...origin/pr/XX`
-- **Don't checkout:** Multiple parallel reviews = don't let them change branches
-- **Post results:** Use `gh pr comment` to post reviews to GitHub
 
 ---
 
-## Claude Code
+## Project Workflow Example
 
 ```bash
-bash workdir:~/project background:true command:"claude \"Your task\""
+# 1. Clone project
+git clone https://github.com/user/repo.git /tmp/myproject
+cd /tmp/myproject
+
+# 2. Analyze with Gemini (fast)
+gemini "Summarize what this project does based on the README and structure"
+
+# 3. Plan changes with Cursor (read-only)
+agent --plan "How would you add user authentication to this app?"
+
+# 4. Implement with Cursor
+agent "Add JWT authentication to the FastAPI app. Create auth routes and middleware."
+
+# 5. Review with Gemini
+gemini "Review the changes in git diff for security issues"
+
+# 6. Commit and push
+git add -A && git commit -m "feat: add JWT authentication"
+git push
 ```
-
----
-
-## OpenCode
-
-```bash
-bash workdir:~/project background:true command:"opencode run \"Your task\""
-```
-
----
-
-## Pi Coding Agent
-
-```bash
-# Install: npm install -g @mariozechner/pi-coding-agent
-bash workdir:~/project background:true command:"pi \"Your task\""
-```
-
----
-
-## Pi flags (common)
-
-- `--print` / `-p`: non-interactive; runs prompt and exits.
-- `--provider <name>`: pick provider (default: google).
-- `--model <id>`: pick model (default: gemini-2.5-flash).
-- `--api-key <key>`: override API key (defaults to env vars).
-
-Examples:
-
-```bash
-# Set provider + model, non-interactive
-bash workdir:~/project background:true command:"pi --provider openai --model gpt-4o-mini -p \"Summarize src/\""
-```
-
----
-
-## tmux (interactive sessions)
-
-Use the tmux skill for interactive coding sessions (always, except very simple one-shot prompts). Prefer bash background mode for non-interactive runs.
-
----
-
-## Parallel Issue Fixing with git worktrees + tmux
-
-For fixing multiple issues in parallel, use git worktrees (isolated branches) + tmux sessions:
-
-```bash
-# 1. Clone repo to temp location
-cd /tmp && git clone git@github.com:user/repo.git repo-worktrees
-cd repo-worktrees
-
-# 2. Create worktrees for each issue (isolated branches!)
-git worktree add -b fix/issue-78 /tmp/issue-78 main
-git worktree add -b fix/issue-99 /tmp/issue-99 main
-
-# 3. Set up tmux sessions
-SOCKET="${TMPDIR:-/tmp}/codex-fixes.sock"
-tmux -S "$SOCKET" new-session -d -s fix-78
-tmux -S "$SOCKET" new-session -d -s fix-99
-
-# 4. Launch Codex in each (after pnpm install!)
-tmux -S "$SOCKET" send-keys -t fix-78 "cd /tmp/issue-78 && pnpm install && codex --yolo 'Fix issue #78: <description>. Commit and push.'" Enter
-tmux -S "$SOCKET" send-keys -t fix-99 "cd /tmp/issue-99 && pnpm install && codex --yolo 'Fix issue #99: <description>. Commit and push.'" Enter
-
-# 5. Monitor progress
-tmux -S "$SOCKET" capture-pane -p -t fix-78 -S -30
-tmux -S "$SOCKET" capture-pane -p -t fix-99 -S -30
-
-# 6. Check if done (prompt returned)
-tmux -S "$SOCKET" capture-pane -p -t fix-78 -S -3 | grep -q "❯" && echo "Done!"
-
-# 7. Create PRs after fixes
-cd /tmp/issue-78 && git push -u origin fix/issue-78
-gh pr create --repo user/repo --head fix/issue-78 --title "fix: ..." --body "..."
-
-# 8. Cleanup
-tmux -S "$SOCKET" kill-server
-git worktree remove /tmp/issue-78
-git worktree remove /tmp/issue-99
-```
-
-**Why worktrees?** Each Codex works in isolated branch, no conflicts. Can run 5+ parallel fixes!
-
-**Why tmux over bash background?** Codex is interactive — needs TTY for proper output. tmux provides persistent sessions with full history capture.
 
 ---
 
 ## ⚠️ Rules
 
-1. **Respect tool choice** — if user asks for Codex, use Codex. NEVER offer to build it yourself!
-2. **Be patient** — don't kill sessions because they're "slow"
+1. **Respect tool choice** — if user asks for Cursor, use Cursor
+2. **Be patient** — don't kill sessions prematurely
 3. **Monitor with process:log** — check progress without interfering
-4. **--full-auto for building** — auto-approves changes
-5. **vanilla for reviewing** — no special flags needed
-6. **Parallel is OK** — run many Codex processes at once for batch work
-7. **NEVER start Codex in ~/clawd/** — it'll read your soul docs and get weird ideas about the org chart! Use the target project dir or /tmp for blank slate chats
-8. **NEVER checkout branches in ~/Projects/clawdbot/** — that's the LIVE Clawdbot instance! Clone to /tmp or use git worktree for PR reviews
+4. **Use --print for scripts** — non-interactive mode for automation
+5. **Parallel is OK** — run multiple agents at once
+6. **Isolate work directories** — don't run agents in the OpenClaw workspace
 
 ---
 
-## PR Template (The Razor Standard)
+## Environment Variables
 
-When submitting PRs to external repos, use this format for quality & maintainer-friendliness:
-
-````markdown
-## Original Prompt
-[Exact request/problem statement]
-
-## What this does
-[High-level description]
-
-**Features:**
-- [Key feature 1]
-- [Key feature 2]
-
-**Example usage:**
 ```bash
-# Example
-command example
+# Add to ~/.bashrc
+export CURSOR_API_KEY="your-cursor-key"      # Optional for Cursor
+export GEMINI_API_KEY="your-gemini-key"      # For Gemini CLI
+export PATH=$HOME/.local/bin:$HOME/.npm-global/bin:$PATH
 ```
 
-## Feature intent (maintainer-friendly)
-[Why useful, how it fits, workflows it enables]
-
-## Prompt history (timestamped)
-- YYYY-MM-DD HH:MM UTC: [Step 1]
-- YYYY-MM-DD HH:MM UTC: [Step 2]
-
-## How I tested
-**Manual verification:**
-1. [Test step] - Output: `[result]`
-2. [Test step] - Result: [result]
-
-**Files tested:**
-- [Detail]
-- [Edge cases]
-
-## Session logs (implementation)
-- [What was researched]
-- [What was discovered]
-- [Time spent]
-
-## Implementation details
-**New files:**
-- `path/file.ts` - [description]
-
-**Modified files:**
-- `path/file.ts` - [change]
-
-**Technical notes:**
-- [Detail 1]
-- [Detail 2]
-
 ---
-*Submitted by Razor 🥷 - Mariano's AI agent*
-````
 
-**Key principles:**
-1. Human-written description (no AI slop)
-2. Feature intent for maintainers
-3. Timestamped prompt history
-4. Session logs if using Codex/agent
+## Troubleshooting
 
-**Example:** https://github.com/steipete/bird/pull/22
+### Agent not found
+```bash
+# Check PATH
+which agent gemini copilot
+
+# Add to PATH
+export PATH=$HOME/.local/bin:$HOME/.npm-global/bin:$PATH
+```
+
+### Gemini auth issues
+```bash
+# Re-login
+gemini  # Follow OAuth flow
+```
+
+### Copilot not working
+```bash
+# Check GitHub auth
+gh auth status
+```

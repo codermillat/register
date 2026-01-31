@@ -192,6 +192,10 @@
     "summarize": {
       "version": "1.0.0",
       "installedAt": 1769892622454
+    },
+    "clawdbot-logs": {
+      "version": "1.0.0",
+      "installedAt": 1769893808953
     }
   }
 }
