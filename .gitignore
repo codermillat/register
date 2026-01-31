@@ -1,0 +1,43 @@
+# Sensitive files - DO NOT COMMIT
+accounts.json
+.encryption_key
+*.pem
+*.key
+
+# Generated state files
+rotation-state.json
+usage-tracker/usage-data.json
+usage-tracker/rate-limits.json
+
+# Environment variables
+.env
+.env.local
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Test outputs
+test-results/
+coverage/

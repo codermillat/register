@@ -33,4 +33,115 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 
 ---
 
+## 🔧 Installed Skills Configuration
+
+### 📧 Email (Gmail)
+```bash
+# Gmail App Password Setup:
+# 1. Go to: https://myaccount.google.com/apppasswords
+# 2. Generate app-specific password
+# 3. Add to environment:
+export EMAIL_IMAP_HOST="imap.gmail.com"
+export EMAIL_IMAP_USER="your-email@gmail.com"
+export EMAIL_IMAP_PASSWORD="your-app-password"
+export EMAIL_SMTP_HOST="smtp.gmail.com"
+export EMAIL_SMTP_PORT="587"
+```
+
+### 📅 Calendar (Google Calendar)
+```bash
+# OAuth Setup Required
+# 1. Create project at: https://console.cloud.google.com
+# 2. Enable Google Calendar API
+# 3. Create OAuth credentials
+# 4. Get refresh token
+export GOOGLE_CALENDAR_CLIENT_ID="your-client-id"
+export GOOGLE_CALENDAR_CLIENT_SECRET="your-secret"
+export GOOGLE_CALENDAR_REFRESH_TOKEN="your-token"
+```
+
+### 🔧 n8n Automation
+```bash
+# Self-hosted or n8n Cloud
+export N8N_API_URL="https://your-n8n-instance.com"
+export N8N_API_KEY="your-api-key"
+# Get API key from: n8n Settings → API
+```
+
+### 💬 Slack (macOS only)
+```bash
+# Install CLI first:
+brew install slack-cli
+# Then authenticate:
+slk login
+# Workspace: [Your workspace name]
+```
+
+### 🐦 X/Twitter
+```bash
+# Create app at: https://developer.twitter.com
+# Get API keys from: Apps → Keys and tokens
+export TWITTER_API_KEY="your-api-key"
+export TWITTER_API_SECRET="your-api-secret"
+export TWITTER_ACCESS_TOKEN="your-access-token"
+export TWITTER_ACCESS_SECRET="your-access-secret"
+```
+
+### 📈 Yahoo Finance
+✅ No configuration needed - works out of the box!
+
+### 🧠 Memory Manager
+✅ No configuration needed - stores locally
+
+### 📺 YouTube Transcript
+✅ No configuration needed - uses residential proxy
+
+### 🎓 Deep Research Agent
+✅ No configuration needed - works out of the box
+
+---
+
+## 💡 Quick Setup Tips
+
+### Priority 1: Email & Calendar
+These are the most valuable for daily productivity. Set these up first.
+
+### Priority 2: n8n Automation
+If you're using n8n for workflows, this unlocks voice/chat control of your automations.
+
+### Priority 3: Social/Communication
+Slack and Twitter are optional but useful if you're active on these platforms.
+
+### Environment Variables Location
+Add to `~/.bashrc` or `~/.zshrc`:
+```bash
+# OpenClaw Skills Configuration
+export EMAIL_IMAP_HOST="imap.gmail.com"
+export EMAIL_IMAP_USER="millat@example.com"
+# ... etc
+```
+
+Then reload: `source ~/.bashrc`
+
+---
+
+## 🎯 EdTech-Specific Workflows
+
+### Student Communication Automation
+- Email skill for student/parent communication
+- Calendar for class scheduling
+- n8n for automated reminders
+
+### Content Creation Pipeline
+- YouTube Transcript for extracting educational content
+- Deep Research for curriculum development
+- Memory Manager for saving best practices
+
+### Market Research
+- Yahoo Finance for EdTech company tracking
+- X/Twitter for industry trends
+- Deep Research for competitive analysis
+
+---
+
 Add whatever helps you do your job. This is your cheat sheet.

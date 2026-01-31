@@ -1,0 +1,164 @@
+{
+  "timestamp": "2026-01-31T15:58:27.803Z",
+  "summary": {
+    "totalAccounts": 4,
+    "proAccounts": 0,
+    "freeAccounts": 4,
+    "configMismatches": 1,
+    "totalMonthlyCapacity": 1800
+  },
+  "accountResults": [
+    {
+      "username": "codermillat",
+      "email": "codermillat@gmail.com",
+      "configTier": "free",
+      "actualTier": "free",
+      "evidence": {
+        "subscriptionAPI": {
+          "statusCode": 404,
+          "data": {
+            "message": "Not Found",
+            "documentation_url": "https://docs.github.com/rest",
+            "status": "404"
+          }
+        },
+        "claude-sonnet-4.5": {
+          "statusCode": 429,
+          "success": false,
+          "body": "quota exceeded\n"
+        },
+        "o1-preview": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "o1-mini": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "gpt-4o": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        }
+      },
+      "modelsAvailable": [],
+      "isProConfirmed": false
+    },
+    {
+      "username": "Unibro6722",
+      "email": "millat67230@gmail.com",
+      "configTier": "pro",
+      "actualTier": "free",
+      "evidence": {
+        "subscriptionAPI": {
+          "statusCode": 404,
+          "data": {
+            "message": "Not Found",
+            "documentation_url": "https://docs.github.com/rest",
+            "status": "404"
+          }
+        },
+        "claude-sonnet-4.5": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        },
+        "o1-preview": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "o1-mini": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "gpt-4o": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        }
+      },
+      "modelsAvailable": [],
+      "isProConfirmed": false
+    },
+    {
+      "username": "Meemibna",
+      "email": "app.codestbd@gmail.com",
+      "configTier": "free",
+      "actualTier": "free",
+      "evidence": {
+        "subscriptionAPI": {
+          "statusCode": 404,
+          "data": {
+            "message": "Not Found",
+            "documentation_url": "https://docs.github.com/rest",
+            "status": "404"
+          }
+        },
+        "claude-sonnet-4.5": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        },
+        "o1-preview": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "o1-mini": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "gpt-4o": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        }
+      },
+      "modelsAvailable": [],
+      "isProConfirmed": false
+    },
+    {
+      "username": "salmanalam001",
+      "email": null,
+      "configTier": "free",
+      "actualTier": "free",
+      "evidence": {
+        "subscriptionAPI": {
+          "statusCode": 404,
+          "data": {
+            "message": "Not Found",
+            "documentation_url": "https://docs.github.com/rest",
+            "status": "404"
+          }
+        },
+        "claude-sonnet-4.5": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        },
+        "o1-preview": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "o1-mini": {
+          "statusCode": 400,
+          "success": false,
+          "body": "{\"error\":{\"message\":\"The requested model is not supported.\",\"code\":\"model_not_supported\",\"param\":\"model\",\"type\":\"invalid_request_error\"}}\n"
+        },
+        "gpt-4o": {
+          "statusCode": 403,
+          "success": false,
+          "body": "Access to this endpoint is forbidden. Please review our [Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service).\n"
+        }
+      },
+      "modelsAvailable": [],
+      "isProConfirmed": false
+    }
+  ]
+}

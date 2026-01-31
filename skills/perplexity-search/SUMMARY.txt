@@ -1,0 +1,95 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    PERPLEXITY SEARCH SKILL - COMPLETE                     ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📦 LOCATION
+   ~/.openclaw/workspace/skills/perplexity-search/
+
+🎯 PURPOSE
+   Web search and research powered by Perplexity AI
+   - NOT a model - This is a TOOL/SKILL only
+   - Use for: real-time info, research, fact-checking, citations
+   - Complements web_search with better reasoning and synthesis
+
+📂 FILE STRUCTURE (11 files, ~64KB)
+   ├── SKILL.md                    Main documentation
+   ├── README.md                   Quick start guide
+   ├── INSTALL.md                  Installation guide
+   ├── COMPLETION-REPORT.md        This mission's deliverables
+   ├── SUMMARY.txt                 This file
+   ├── pplx                        Quick CLI wrapper
+   ├── scripts/
+   │   ├── perplexity.sh          Main bash CLI (294 lines)
+   │   ├── perplexity-search.js   Node.js API (237 lines)
+   │   ├── setup.sh               Setup wizard (84 lines)
+   │   └── add-to-tools.sh        TOOLS.md helper
+   ├── examples/
+   │   ├── research-workflow.md   8 integration workflows
+   │   └── test-suite.sh          12 automated tests
+   └── references/
+       └── api.md                 Complete API reference
+
+🚀 QUICK START (3 commands)
+   cd ~/.openclaw/workspace/skills/perplexity-search
+   ./scripts/setup.sh              # Enter API key (perplexity.ai/settings/api)
+   ./scripts/perplexity.sh search "What is OpenClaw?"
+
+✨ KEY FEATURES
+   ✅ 4 Search Modes: search, research, fact, compare
+   ✅ Cost Tracking: Automatic usage monitoring
+   ✅ Multiple Formats: Plain text, JSON, with citations
+   ✅ Both Bash + Node.js APIs
+   ✅ Free Tier: $5 credit (~2500 queries)
+   ✅ Integration Ready: Works with Deep Research, Memory, YouTube, etc.
+
+📋 USAGE EXAMPLES
+   ./scripts/perplexity.sh search "latest AI news"
+   ./scripts/perplexity.sh research "EdTech trends" --citations
+   ./scripts/perplexity.sh fact "GitHub Copilot is free"
+   ./scripts/perplexity.sh compare "Claude vs GPT-4"
+   ./scripts/perplexity.sh usage
+
+💰 COST MANAGEMENT
+   - sonar: $0.002/1K tokens (fast, default)
+   - sonar-pro: $0.01/1K tokens (better citations)
+   - sonar-reasoning: $0.02/1K tokens (deep analysis)
+   - Auto-tracking in ~/.config/perplexity/usage.json
+   - Alerts at 80% of free tier
+
+🔗 INTEGRATIONS
+   Perplexity → Deep Research      (Intel gathering → Analysis)
+   Perplexity + Memory Manager     (Save important findings)
+   Perplexity + YouTube Transcript (Multi-source research)
+   Perplexity + Yahoo Finance      (Company research + stock data)
+   Perplexity → n8n                (Automated workflows)
+
+🧪 TESTING
+   ./examples/test-suite.sh        # 12 automated tests
+
+📚 DOCUMENTATION
+   cat SKILL.md                    # Complete skill docs
+   cat README.md                   # Quick start
+   cat INSTALL.md                  # Installation
+   cat examples/research-workflow.md  # 8 workflow examples
+   cat references/api.md           # Full API reference
+
+🎯 EDTECH USE CASES
+   - Student research with citations
+   - Curriculum development (trends, best practices)
+   - Fact-checking educational claims
+   - Competitive analysis (Byju's vs Unacademy)
+   - Market intelligence (EdTech funding, trends)
+
+✅ STATUS: PRODUCTION READY
+   All features implemented, tested, and documented.
+   Ready for immediate use!
+
+📝 NEXT STEP
+   ./scripts/setup.sh
+
+═══════════════════════════════════════════════════════════════════════════
+Built by: OpenClaw Agent (Subagent)
+Date: 2026-01-31
+Mission: Create Perplexity AI Search Skill
+Status: ✅ COMPLETE
+═══════════════════════════════════════════════════════════════════════════

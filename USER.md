@@ -19,6 +19,7 @@
 - **Work style:** *(learning)*
 - **Interests:** AI/ML, education technology, helping Bangladeshi students study in India
 - **Preferences:** Friendly tone, proactive support, continuous learning
+- **Note:** millat.tech domain no longer owned (as of Jan 2026)
 
 ## Projects & Expertise
 *(Discovered from GitHub)*

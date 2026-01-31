@@ -1,0 +1,53 @@
+{
+  "name": "model-rotation-system",
+  "version": "1.0.0",
+  "description": "Comprehensive model rotation and management system for GitHub Copilot Pro accounts",
+  "main": "smart-spawn.js",
+  "scripts": {
+    "test": "node test-system.js",
+    "test:examples": "node test-system.js --examples",
+    "examples": "node examples.js",
+    "dashboard": "cd usage-tracker && python3 -m http.server 8080",
+    "status": "node account-rotator.js status",
+    "stats": "node usage-tracker/usage-tracker.js stats",
+    "select": "node model-selector.js",
+    "rotate": "node account-rotator.js next"
+  },
+  "keywords": [
+    "ai",
+    "model-selection",
+    "account-rotation",
+    "usage-tracking",
+    "github-copilot",
+    "openai",
+    "anthropic",
+    "google"
+  ],
+  "author": "OpenClaw AI",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "model-selector.js",
+    "account-rotator.js",
+    "smart-spawn.js",
+    "usage-tracker/",
+    "MODEL-CAPABILITIES.md",
+    "model-rotation-integration.md",
+    "accounts.json.template",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/model-rotation-system.git"
+  },
+  "bin": {
+    "model-select": "./model-selector.js",
+    "account-rotate": "./account-rotator.js",
+    "usage-track": "./usage-tracker/usage-tracker.js",
+    "smart-spawn": "./smart-spawn.js"
+  }
+}

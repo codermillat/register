@@ -1,0 +1,12 @@
+#!/bin/bash
+# Perplexity Search - Quick Access Wrapper
+# Install: ln -s ~/.openclaw/workspace/skills/perplexity-search/pplx ~/bin/pplx
+
+SKILL_DIR="$HOME/.openclaw/workspace/skills/perplexity-search"
+
+if [ ! -d "$SKILL_DIR" ]; then
+    echo "Error: Perplexity Search skill not found at $SKILL_DIR"
+    exit 1
+fi
+
+exec "$SKILL_DIR/scripts/perplexity.sh" "$@"

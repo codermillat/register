@@ -1,0 +1,29 @@
+# Perplexity Search - Git Ignore
+
+# Config files (contains API keys)
+~/.config/perplexity/credentials.json
+~/.config/perplexity/usage.json
+
+# Temp files
+*.tmp
+*.log
+/tmp/
+
+# Node modules (if added later)
+node_modules/
+package-lock.json
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test outputs
+test-output/
+*.test.json

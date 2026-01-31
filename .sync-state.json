@@ -1,0 +1,33 @@
+{
+  "history": [
+    {
+      "timestamp": "2026-01-31T16:19:07.065Z",
+      "synced": 0,
+      "failed": 4
+    },
+    {
+      "timestamp": "2026-01-31T16:31:10.024Z",
+      "synced": 0,
+      "failed": 4
+    },
+    {
+      "timestamp": "2026-01-31T16:31:57.122Z",
+      "synced": 4,
+      "failed": 0
+    },
+    {
+      "timestamp": "2026-01-31T16:32:40.193Z",
+      "synced": 0,
+      "failed": 0
+    }
+  ],
+  "lastSync": {
+    "timestamp": "2026-01-31T16:32:40.193Z",
+    "totalAccounts": 4,
+    "synced": 0,
+    "failed": 0,
+    "skipped": 4,
+    "updates": [],
+    "errors": []
+  }
+}

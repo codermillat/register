@@ -1,0 +1,19 @@
+{
+  "name": "binance-price-monitor",
+  "version": "1.0.0",
+  "description": "Real-time Binance price monitoring via WebSocket",
+  "author": "OpenClaw",
+  "category": "crypto",
+  "keywords": ["binance", "crypto", "price", "websocket", "monitor", "bitcoin", "ethereum"],
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+    "monitor": "python3 {baseDir}/scripts/websocket_monitor.py",
+    "alert": "python3 {baseDir}/scripts/set_price_alert.py",
+    "summary": "python3 {baseDir}/scripts/multi_market_summary.py",
+    "install": "pip install aiohttp"
+  },
+  "dependencies": {
+    "pip": ["aiohttp"]
+  }
+}

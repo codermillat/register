@@ -4,6 +4,166 @@
     "sonoscli": {
       "version": "1.0.0",
       "installedAt": 1769864660911
+    },
+    "calendar": {
+      "version": "1.0.0",
+      "installedAt": 1769874608521
+    },
+    "email": {
+      "version": "1.1.0",
+      "installedAt": 1769874616649
+    },
+    "yahoofinance": {
+      "version": "1.0.1",
+      "installedAt": 1769874624895
+    },
+    "n8n-automation": {
+      "version": "0.1.0",
+      "installedAt": 1769874632757
+    },
+    "memory-manager": {
+      "version": "1.0.0",
+      "installedAt": 1769874644447
+    },
+    "moltbook-interact": {
+      "version": "1.0.1",
+      "installedAt": 1769874648155
+    },
+    "youtube-transcript": {
+      "version": "1.0.1",
+      "installedAt": 1769874652810
+    },
+    "deep-research": {
+      "version": "1.0.1",
+      "installedAt": 1769874660534
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1769874664512
+    },
+    "slack-personal": {
+      "version": "0.1.3",
+      "installedAt": 1769874668914
+    },
+    "indirect-prompt-injection": {
+      "version": "1.0.0",
+      "installedAt": 1769874674059
+    },
+    "x-twitter": {
+      "version": "2.3.1",
+      "installedAt": 1769874676992
+    },
+    "molt-chess": {
+      "version": "1.1.0",
+      "installedAt": 1769874685276
+    },
+    "clawhub": {
+      "version": "1.0.4",
+      "installedAt": 1769874685575
+    },
+    "proactive-agent": {
+      "version": "1.2.4",
+      "installedAt": 1769874954544
+    },
+    "yt-dlp-downloader-skill": {
+      "version": "0.1.0",
+      "installedAt": 1769874962366
+    },
+    "council-of-the-wise": {
+      "version": "1.2.0",
+      "installedAt": 1769874970537
+    },
+    "self-reflection": {
+      "version": "1.1.1",
+      "installedAt": 1769874978169
+    },
+    "prompt-guard": {
+      "version": "2.5.1",
+      "installedAt": 1769874986135
+    },
+    "binance-price-monitor": {
+      "version": "1.0.0",
+      "installedAt": 1769883656273
+    },
+    "claude-optimised": {
+      "version": "1.0.1",
+      "installedAt": 1769883669616
+    },
+    "fast-browser-use": {
+      "version": "1.0.2",
+      "installedAt": 1769883674952
+    },
+    "pandic-office": {
+      "version": "1.0.0",
+      "installedAt": 1769883676897
+    },
+    "accessibility": {
+      "version": "0.1.0",
+      "installedAt": 1769883680026
+    },
+    "technical-analyst": {
+      "version": "0.1.0",
+      "installedAt": 1769883682117
+    },
+    "research-paper-writer": {
+      "version": "0.1.0",
+      "installedAt": 1769883684863
+    },
+    "seo-optimizer": {
+      "version": "0.1.0",
+      "installedAt": 1769883687408
+    },
+    "agent-orchestrator": {
+      "version": "0.1.0",
+      "installedAt": 1769883689678
+    },
+    "twittertrends": {
+      "version": "1.0.1",
+      "installedAt": 1769883691684
+    },
+    "xtrends": {
+      "version": "1.0.1",
+      "installedAt": 1769883693822
+    },
+    "polymarketcli": {
+      "version": "1.0.1",
+      "installedAt": 1769883695664
+    },
+    "moltpixel": {
+      "version": "1.0.0",
+      "installedAt": 1769883697789
+    },
+    "agentpixels-skill": {
+      "version": "1.1.0",
+      "installedAt": 1769883700120
+    },
+    "4claw": {
+      "version": "0.2.0",
+      "installedAt": 1769883710556
+    },
+    "confidant": {
+      "version": "1.0.0",
+      "installedAt": 1769883712693
+    },
+    "test-specialist": {
+      "version": "0.1.0",
+      "installedAt": 1769883715381
+    },
+    "brand-analyzer": {
+      "version": "0.1.0",
+      "installedAt": 1769883718150
+    },
+    "nodetool": {
+      "version": "0.6.3",
+      "installedAt": 1769883720481
+    },
+    "clawdzap": {
+      "version": "1.0.2",
+      "installedAt": 1769883722944
+    },
+    "agent-relay-digest": {
+      "version": "0.1.0",
+      "installedAt": 1769883725127
     }
   }
 }

@@ -1,0 +1,56 @@
+{
+  "description": "GitHub Copilot Account Sync - Automatic sync jobs",
+  "jobs": [
+    {
+      "id": "copilot-sync-main",
+      "description": "Sync GitHub Copilot accounts every 4 hours",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 14400000
+      },
+      "payload": {
+        "kind": "systemEvent",
+        "text": "Running GitHub Copilot account sync...",
+        "data": {
+          "command": "node github-copilot-sync.js sync --quiet",
+          "workdir": "~/.openclaw/workspace"
+        }
+      },
+      "sessionTarget": "main"
+    },
+    {
+      "id": "copilot-monitor",
+      "description": "Monitor GitHub Copilot account usage every 2 hours",
+      "schedule": {
+        "kind": "every",
+        "everyMs": 7200000
+      },
+      "payload": {
+        "kind": "systemEvent",
+        "text": "Monitoring GitHub Copilot account usage...",
+        "data": {
+          "command": "node github-copilot-sync.js monitor",
+          "workdir": "~/.openclaw/workspace"
+        }
+      },
+      "sessionTarget": "main"
+    },
+    {
+      "id": "copilot-daily-status",
+      "description": "Daily health check at 9 AM UTC",
+      "schedule": {
+        "kind": "cron",
+        "cronExpression": "0 9 * * *"
+      },
+      "payload": {
+        "kind": "systemEvent",
+        "text": "Daily GitHub Copilot account health check",
+        "data": {
+          "command": "node github-copilot-sync.js status",
+          "workdir": "~/.openclaw/workspace"
+        }
+      },
+      "sessionTarget": "main"
+    }
+  ]
+}
