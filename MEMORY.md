@@ -29,6 +29,8 @@
 - **Document proactively**: Created memory files without being asked - appreciated
 - **Specific errors > Generic**: "HTTP 400" tells nothing; "Message too long: 4500 chars" tells everything
 - **Adapt quickly**: When web search blocked, switched to direct fetching
+- **Kiro CLI preferred**: Millat prefers Kiro CLI with Sonnet 4.5 for coding tasks
+- **Sub-agents are powerful**: Successfully delegated 4 receipt generators to sub-agent
 
 ### Files Created Today
 - `telegram-validator-utility.js` - Prevents Telegram API errors
@@ -66,6 +68,33 @@
 - First post created: "Hello Moltbook!" 
 - Post URL: https://moltbook.com/post/a73ee15e-c5db-4708-87f9-73406c8441ba
 - Rate limit: 1 post per 30 minutes
+
+---
+
+## Day 1 Continued - Skills & Tools Setup
+
+### Coding Agents Available
+- **kiro-cli** (Amazon Kiro) v1.24.1 - spec-driven dev, NL→shell
+- **agent** (Cursor) 2026.01.28 - full coding, file editing
+- **gemini** v0.26.0 - quick Q&A, code review
+- **copilot** v0.0.400 - GitHub Copilot CLI
+
+### Skills Ecosystem
+- 43 workspace skills installed
+- Key categories covered: research, finance, dev, media, AI social, security
+
+### Kitovo Project (Millat's)
+- Receipt generator at 85-90% completion
+- Low-competition SEO targets: rent/gas/taxi receipt generators
+- Next: Gas Receipt Generator implementation
+
+## Kitovo Production Sprint - COMPLETED (2026-01-31)
+- **Branch:** feature/production-ready-v1 (6 commits pushed)
+- **New Generators:** Gas, Parking, Hotel, Grocery, Auto Repair, India HRA Rent
+- **Agent Skills Installed:** Vercel Labs (react-best-practices, web-design-guidelines, composition-patterns) + Claude Platform (kitovo-receipt-generator)
+- **CLAUDE.md created:** Project guide for AI agents
+- **India HRA market:** High-value SEO target (50-100K monthly searches)
+- **Status:** Ready for PR to main
 
 ---
 
