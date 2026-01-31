@@ -1,7 +1,7 @@
 ---
 name: coding-agent
-description: Run Cursor Agent, Gemini CLI, GitHub Copilot, Codex, Claude Code, or Pi via background process for programmatic control.
-metadata: {"clawdbot":{"emoji":"🧩","requires":{"anyBins":["agent","gemini","copilot","claude","codex","opencode","pi"]}}}
+description: Run Kiro CLI, Cursor Agent, Gemini CLI, GitHub Copilot, or other coding agents via background process for programmatic control.
+metadata: {"clawdbot":{"emoji":"🧩","requires":{"anyBins":["kiro-cli","agent","gemini","copilot","claude","codex","opencode","pi"]}}}
 ---
 
 # Coding Agent (background-first)
@@ -12,12 +12,12 @@ Use **bash background mode** for non-interactive coding work. For interactive co
 
 | Agent | Command | Status | Best For |
 |-------|---------|--------|----------|
+| 🚀 **Kiro CLI** | `kiro-cli` | ✅ Installed (v1.24.1) | Spec-driven dev, AWS, complex features |
 | 📝 **Cursor Agent** | `agent` | ✅ Installed | Full coding tasks, file editing |
-| ♊️ **Gemini CLI** | `gemini` | ✅ Installed | Quick Q&A, code review |
-| 🤖 **GitHub Copilot** | `copilot` | ✅ Installed | Code suggestions, explain |
+| ♊️ **Gemini CLI** | `gemini` | ✅ Installed (v0.26.0) | Quick Q&A, code review |
+| 🤖 **GitHub Copilot** | `copilot` | ✅ Installed (v0.0.400) | Code suggestions, explain |
 | 💻 Codex | `codex` | ❌ Not installed | — |
 | 🧠 Claude | `claude` | ❌ Not installed | — |
-| 🥧 Pi | `pi` | ❌ Not installed | — |
 
 ---
 
@@ -48,7 +48,54 @@ process action:kill sessionId:XXX
 
 ---
 
-## 📝 Cursor Agent (Primary)
+## 🚀 Kiro CLI (Amazon) — NEW!
+
+Kiro is Amazon's spec-driven AI coding agent. Great for structured development and enterprise workflows.
+
+### Quick usage
+```bash
+# Start interactive chat
+kiro-cli chat
+
+# Chat with specific agent
+kiro-cli --agent AGENT_NAME
+
+# Natural language to shell
+kiro-cli translate "find all python files modified today"
+
+# Check account/credits
+kiro-cli whoami
+kiro-cli user
+```
+
+### Subcommands
+```bash
+kiro-cli chat          # AI assistant in terminal
+kiro-cli agent         # Manage AI agents
+kiro-cli translate     # Natural language → shell commands
+kiro-cli mcp           # Model Context Protocol
+kiro-cli inline        # Inline shell completions
+kiro-cli doctor        # Fix common issues
+kiro-cli settings      # Customize appearance
+```
+
+### Background mode
+```bash
+# Run Kiro task in background
+exec background:true pty:true command:"kiro-cli chat"
+
+# Monitor
+process action:log sessionId:XXX
+```
+
+### Account
+- Free tier: 50 credits/month + 500 bonus credits
+- Login: `kiro-cli login`
+- Check usage: `kiro-cli whoami`
+
+---
+
+## 📝 Cursor Agent
 
 The Cursor Agent CLI (`agent`) is a headless AI coding assistant.
 
@@ -71,12 +118,6 @@ agent --plan "Review this codebase and suggest improvements"
 
 # Ask mode (Q&A)
 agent --mode ask "How does the authentication work in this project?"
-```
-
-### With API key
-```bash
-agent --api-key $CURSOR_API_KEY "Your task"
-# Or set env: export CURSOR_API_KEY="your-key"
 ```
 
 ### Useful flags
@@ -140,11 +181,6 @@ copilot
 copilot --acp  # Start as Agent Client Protocol server
 ```
 
-### Useful flags
-- `--add-dir <dir>`: Add directory to allowed list
-- `--add-github-mcp-tool <tool>`: Enable specific MCP tools
-- Use `"*"` for all tools
-
 ---
 
 ## Choosing the Right Agent
@@ -153,10 +189,13 @@ copilot --acp  # Start as Agent Client Protocol server
 |------|------------|---------|
 | Quick code question | Gemini | `gemini "question"` |
 | Explain code | Copilot | `copilot explain "code"` |
-| Build feature | Cursor | `agent --print "task"` |
-| Code review | Gemini or Cursor | `gemini "review..."` or `agent --plan` |
+| Shell command help | Kiro | `kiro-cli translate "description"` |
+| Build feature | Cursor or Kiro | `agent --print "task"` |
+| Spec-driven development | Kiro | `kiro-cli chat` |
+| Code review | Gemini | `gemini "review..."` |
 | Refactor files | Cursor | `agent "refactor..."` |
-| Debug issue | Cursor | `agent --mode ask "why is X failing?"` |
+| AWS/Terraform | Kiro | `kiro-cli chat` |
+| Debug issue | Cursor | `agent --mode ask "why?"` |
 
 ---
 
@@ -166,7 +205,7 @@ copilot --acp  # Start as Agent Client Protocol server
 # Run multiple agents in parallel
 exec background:true command:"agent --print 'Fix the login bug'" 
 exec background:true command:"gemini 'Review auth.py for security issues' > /tmp/review.txt"
-exec background:true command:"copilot suggest 'Optimize database queries'"
+exec background:true pty:true command:"kiro-cli translate 'optimize docker build'"
 
 # Monitor all
 process action:list
@@ -184,19 +223,22 @@ process action:log sessionId:XXX
 git clone https://github.com/user/repo.git /tmp/myproject
 cd /tmp/myproject
 
-# 2. Analyze with Gemini (fast)
-gemini "Summarize what this project does based on the README and structure"
+# 2. Quick shell commands with Kiro
+kiro-cli translate "show git log for last week"
 
-# 3. Plan changes with Cursor (read-only)
-agent --plan "How would you add user authentication to this app?"
+# 3. Analyze with Gemini (fast)
+gemini "Summarize what this project does based on the README"
 
-# 4. Implement with Cursor
-agent "Add JWT authentication to the FastAPI app. Create auth routes and middleware."
+# 4. Plan changes with Cursor (read-only)
+agent --plan "How would you add user authentication?"
 
-# 5. Review with Gemini
+# 5. Implement with Cursor or Kiro
+agent "Add JWT authentication to the FastAPI app"
+
+# 6. Review with Gemini
 gemini "Review the changes in git diff for security issues"
 
-# 6. Commit and push
+# 7. Commit and push
 git add -A && git commit -m "feat: add JWT authentication"
 git push
 ```
@@ -205,7 +247,7 @@ git push
 
 ## ⚠️ Rules
 
-1. **Respect tool choice** — if user asks for Cursor, use Cursor
+1. **Respect tool choice** — if user asks for Kiro, use Kiro
 2. **Be patient** — don't kill sessions prematurely
 3. **Monitor with process:log** — check progress without interfering
 4. **Use --print for scripts** — non-interactive mode for automation
@@ -218,7 +260,6 @@ git push
 
 ```bash
 # Add to ~/.bashrc
-export CURSOR_API_KEY="your-cursor-key"      # Optional for Cursor
 export GEMINI_API_KEY="your-gemini-key"      # For Gemini CLI
 export PATH=$HOME/.local/bin:$HOME/.npm-global/bin:$PATH
 ```
@@ -230,20 +271,25 @@ export PATH=$HOME/.local/bin:$HOME/.npm-global/bin:$PATH
 ### Agent not found
 ```bash
 # Check PATH
-which agent gemini copilot
+which kiro-cli agent gemini copilot
 
 # Add to PATH
 export PATH=$HOME/.local/bin:$HOME/.npm-global/bin:$PATH
 ```
 
+### Kiro issues
+```bash
+kiro-cli doctor     # Diagnose issues
+kiro-cli login      # Re-authenticate
+kiro-cli whoami     # Check account status
+```
+
 ### Gemini auth issues
 ```bash
-# Re-login
-gemini  # Follow OAuth flow
+gemini  # Follow OAuth flow to re-login
 ```
 
 ### Copilot not working
 ```bash
-# Check GitHub auth
-gh auth status
+gh auth status  # Check GitHub auth
 ```
